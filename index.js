@@ -13,10 +13,11 @@ const io = new Server(server, {
 });
 
 app.use(cors()); // Enable CORS for all routes
-app.use(express.json()); // Parse JSON bodies
-app.use('/audio', express.raw({ type: 'application/octet-stream', limit: '50mb' }));
 
 const PORT = process.env.PORT || 3000;
+
+// Handle raw body buffer for audio endpoint
+app.use('/audio', express.raw({ type: 'application/octet-stream', limit: '50mb' }));
 
 // WebSocket connection
 io.on('connection', (socket) => {
@@ -54,3 +55,4 @@ app.post('/audio', (req, res) => {
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
