@@ -46,8 +46,10 @@ io.on('connection', (socket) => {
 app.post('/audio', (req, res) => {
     const audioData = req.body; // Buffer containing binary audio data
     console.log('Received audio data via HTTP');
+    //console.log(audioData);
     // Broadcast this audio data to all connected clients
-    io.emit('audio', { audioData: audioData.toString('base64') });
+    // io.emit('audio', { audioData: audioData.toString('base64') });
+    io.emit('audio', audioData );
     res.status(200).send('Audio data received');
 });
 
@@ -55,4 +57,5 @@ app.post('/audio', (req, res) => {
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
 
